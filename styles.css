@@ -282,8 +282,16 @@ body.loaded #splash-screen {
   pointer-events: none;
 }
 
+body:not(.loaded) #sticky-bar {
+  display: none; /* Hide the sticky bar when the body does not have the "loaded" class */
+}
+
 body.loaded #website-content {
   opacity: 1;
+}
+
+body.loaded #sticky-bar {
+  display: flex; /* Show the sticky bar when the body has the "loaded" class */
 }
 
 
