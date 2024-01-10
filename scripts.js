@@ -63,35 +63,43 @@ xhr.onerror = function () {
 
 xhr.send();
 
-// Function to show iOS install modal only once
-function showIosInstallModal(localStorageKey) {
-  // Detect if the device is on iOS
-  const isIos = () => {
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    return /iphone|ipad|ipod/.test(userAgent);
-  };
-  
-  // Check if the device is in standalone mode
-  const isInStandaloneMode = () => {
-    return (
-      "standalone" in window.navigator &&
-      window.navigator.standalone
-    );
-  };
-  
-  // Check if the modal has already been shown
-  const localStorageKeyValue = localStorage.getItem(localStorageKey);
-  const iosInstallModalShown = localStorageKeyValue
-    ? JSON.parse(localStorageKeyValue)
-    : false;
+let deferredPrompt;
 
-  // Determine if the modal should be shown
-  const shouldShowModal = isIos() && !isInStandaloneMode() && !iosInstallModalShown;
+window.addEventListener('beforeinstallprompt', (event) => {
+    // Prevent the default behavior
+    event.preventDefault();
 
-  // Update localStorage to mark the modal as shown if applicable
-  if (shouldShowModal) {
-    localStorage.setItem(localStorageKey, "true");
-  }
+    // Stash the event so it can be triggered later
+    deferredPrompt = event;
 
-  return shouldShowModal;
-}
+    // Show the install button
+    document.getElementById('installButton').removeAttribute('hidden');
+});
+
+// Handle button click to install the app
+document.getElementById('installButton').addEventListener('click', () => {
+    // Show the installation prompt
+    deferredPrompt.prompt();
+
+    // Wait for the user to respond to the prompt
+    deferredPrompt.userChoice.then((choiceResult) => {
+        // Check if the user accepted the prompt
+        if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+        } else {
+            console.log('User dismissed the install prompt');
+        }
+
+        // Clear the deferred prompt variable
+        deferredPrompt = null;
+
+        // Hide the install button
+        document.getElementById('installButton').setAttribute('hidden', '');
+    });
+});
+
+// Handle appinstalled event
+window.addEventListener('appinstalled', (event) => {
+    console.log('App installed successfully');
+    // Additional logic can be added here if needed
+});

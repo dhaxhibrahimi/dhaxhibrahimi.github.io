@@ -38,10 +38,10 @@ header {
 }
 
 .dropdown {
-    display: flex;
-    position: static;
-    flex-wrap: nowrap;
-    flex-direction: column;
+  display: flex;
+  position: static;
+  flex-wrap: nowrap;
+  flex-direction: column;
 }
 
 .dropdown .dropbtn {
@@ -131,38 +131,9 @@ p {
 }
 
 /* Mobile Styles */
-@media only screen and (max-width: 768px) {
-  .menu-category {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  h2 {
-    white-space: normal;
-    font-size: 18px;
-    overflow-wrap: anywhere;
-  }
-}
-
-@media only screen and (max-width: 1280px) {
-  .navbar a,
-  .dropdown .dropbtn {
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .menu-category {
-    width: 100%;
-  }
-
-  h2 {
-    white-space: normal;
-    font-size: 18px;
-    overflow-wrap: anywhere;
-  }
-}
-
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 768px),
+       only screen and (max-width: 1280px),
+       only screen and (max-width: 480px) {
   .navbar a,
   .dropdown .dropbtn {
     font-size: 14px;
@@ -204,36 +175,33 @@ h3 {
 
 .separator {
   width: 100%;
-  height: 1.5px; /* Set the desired height of the separator */
-  background-color: #640000; /* Set the color of the separator */
-  margin: 0; /* Set the margin to control the spacing around the separator */
+  height: 1.5px;
+  background-color: #640000;
+  margin: 0;
 }
 
 .ml-left {
-  flex: 0; /* Adjust the flex value as needed */
+  flex: 0;
   color: #fff;
 }
 
 .sticky-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-    height: 40px; /* Adjusted height */
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 5px; /* Adjusted padding */
-    z-index: 1002;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #1c1c1c;
+  text-align: center;
+  padding: 5px;
 }
 
 .sticky-bar img {
-    max-height: 70%; /* Ensure the logo doesn't exceed the height of the sticky bar */
-    max-width: 70%; /* Ensure the logo doesn't exceed the width of the sticky bar */
-    filter: brightness(0) invert(1);
-    opacity: 20%;
+  max-height: 70%;
+  max-width: 70%;
+  filter: brightness(0) invert(1);
+  opacity: 50%;
 }
 
 #splash-screen {
@@ -242,40 +210,67 @@ h3 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #1c1c1c; /* Color specified in manifest.json or any styling you want */
+  background-color: #1c1c1c;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 1;
-  transition: opacity 0.1s ease-in-out; /* Add a smooth fade-out transition */
+  transition: opacity 0.1s ease-in-out;
 }
 
 #splash-screen img {
-  width: 148px; /* Set the desired width */
-  height: 48px; /* Set the desired height */
-  /* Add other styles as needed */
+  width: 148px;
+  height: 48px;
 }
 
 #website-content {
   opacity: 0;
-  transition: opacity 0.1s ease-in-out; /* Add a smooth fade-in transition for the website content */
+  transition: opacity 0.1s ease-in-out;
 }
 
 body.loaded #splash-screen {
   opacity: 0;
-  pointer-events: none; /* Make sure users cannot interact with the splash screen during the fade-out */
+  pointer-events: none;
 }
 
 body.loaded #website-content {
   opacity: 1;
 }
 
-body:not(.loaded) #sticky-bar {
-  display: none; /* Hide the sticky bar when the body does not have the "loaded" class */
+body:not(.loaded) .sticky-footer {
+  display: none;
 }
 
-body.loaded #sticky-bar {
-  display: flex; /* Show the sticky bar when the body has the "loaded" class */
+body.loaded .sticky-footer {
+  display: flex;
 }
 
+.sticky-footer {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  z-index: 1002;
+}
 
+h4 {
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  color: #ffffff;
+  margin-top: 2px;
+  text-transform: uppercase;
+  overflow-wrap: normal;
+  font-size: 12px;
+}
+
+.sticky-bar2 {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 20px;
+  background-color: #333;
+  text-align: center;
+  padding: 0px;
+  align-content: center;
+  flex-wrap: nowrap;
+}
