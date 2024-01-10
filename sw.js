@@ -1,6 +1,7 @@
 // sw.js
 
-const cacheVersion = 3;  // Increment this version number
+const cacheBustedUrl = `${url}?t=${new Date().getTime()}`;
+const cacheVersion = 1;  // Increment this version number
 const cacheName = `umami-v${cacheVersion}`;
 const filesToCache = [
   '/',
