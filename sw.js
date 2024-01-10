@@ -1,6 +1,6 @@
-// service-worker.js
+// sw.js
 
-const cacheVersion = 2;  // Change this version number
+const cacheVersion = 1;  // Increment this version number
 const cacheName = `umami-v${cacheVersion}`;
 const filesToCache = [
   '/',
@@ -9,12 +9,15 @@ const filesToCache = [
   '/app.js',
   '/menu.html',
   '/scripts.js',
+  '/icons/',
   '/manifest.json',
   // Add more files to cache as needed
 ];
 
 self.addEventListener('install', (event) => {
   console.log('Service Worker: Installing...');
+
+  // Fetch each file and cache it
   event.waitUntil(
     Promise.all(
       filesToCache.map((url) => {
@@ -29,8 +32,11 @@ self.addEventListener('install', (event) => {
           .catch((error) => console.error(error));
       })
     )
+    .then(() => {
+      console.log('Service Worker: Installation complete. Skipping waiting.');
+      self.skipWaiting(); // Activate new service worker immediately
+    })
   );
-  self.skipWaiting(); // Activate new service worker immediately
 });
 
 self.addEventListener('activate', (event) => {
@@ -56,11 +62,4 @@ self.addEventListener('fetch', (event) => {
       return response || fetch(event.request);
     })
   );
-});
-
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING_CONFIRMATION') {
-    // User has confirmed to skip waiting and reload
-    self.clients.claim();
-  }
 });
