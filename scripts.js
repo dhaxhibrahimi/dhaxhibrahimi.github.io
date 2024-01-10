@@ -45,20 +45,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'menu.html', true);
-
-xhr.onload = function () {
-    if (xhr.status >= 200 && xhr.status < 300) {
-        document.getElementById('menu-container').innerHTML = xhr.responseText;
-    } else {
-        console.error('Error fetching menu.html:', xhr.statusText);
-    }
-};
-
-xhr.onerror = function () {
-    console.error('Network error while fetching menu.html');
-};
-
-xhr.send();
