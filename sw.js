@@ -1,6 +1,6 @@
 // service-worker.js
 
-const cacheVersion = 1;  // Change this version number
+const cacheVersion = 2;  // Change this version number
 const cacheName = `umami-v${cacheVersion}`;
 const filesToCache = [
   '/',
@@ -16,10 +16,19 @@ const filesToCache = [
 self.addEventListener('install', (event) => {
   console.log('Service Worker: Installing...');
   event.waitUntil(
-    caches.open(cacheName).then((cache) => {
-      console.log('Service Worker: Caching files');
-      return cache.addAll(filesToCache);
-    })
+    Promise.all(
+      filesToCache.map((url) => {
+        return fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`Failed to fetch ${url}`);
+            }
+            return response;
+          })
+          .then((response) => caches.open(cacheName).then((cache) => cache.put(url, response)))
+          .catch((error) => console.error(error));
+      })
+    )
   );
   self.skipWaiting(); // Activate new service worker immediately
 });
