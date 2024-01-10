@@ -63,24 +63,25 @@ xhr.onerror = function () {
 
 xhr.send();
 
-if ('serviceWorker' in navigator && navigator.standalone) {
-  navigator.serviceWorker.register('/sw.js')
-    .then(registration => {
-      registration.addEventListener('updatefound', () => {
-        const newWorker = registration.installing;
-        newWorker.addEventListener('statechange', () => {
-          if (newWorker.state === 'installed') {
-            notifyUserAboutUpdate();  // Your update notification logic
-          }
-        });
-      });
-    })
-    .catch(error => console.error('Service Worker registration failed:', error));
-}
+navigator.serviceWorker.addEventListener('message', (event) => {
+  if (event.data.action === 'updateAvailable' && isStandalonePWA()) {
+    // Reload the page to apply updates
+    location.reload(true);
+  }
+});
 
-function notifyUserAboutUpdate() {
-  // Implement your logic to notify the user about the update
-  // This could be showing a notification or displaying a UI element
-  // to prompt the user to refresh the page.
-  console.log('New update available! Please refresh the page.');
+// Reload page on service worker registration
+navigator.serviceWorker.register('/sw.js').then((registration) => {
+  registration.addEventListener('updatefound', () => {
+    // Skip waiting to activate the new service worker
+    registration.waiting.postMessage({ action: 'skipWaiting' });
+  });
+});
+
+// Function to check if the app is running in standalone mode on iOS
+function isStandalonePWA() {
+  return (
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone
+  );
 }
