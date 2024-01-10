@@ -63,29 +63,6 @@ xhr.onerror = function () {
 
 xhr.send();
 
-navigator.serviceWorker.addEventListener('message', (event) => {
-  if (event.data.action === 'updateAvailable' && isStandalonePWA()) {
-    // Reload the page to apply updates
-    location.reload(true);
-  }
-});
-
-// Reload page on service worker registration
-navigator.serviceWorker.register('/sw.js').then((registration) => {
-  registration.addEventListener('updatefound', () => {
-    // Skip waiting to activate the new service worker
-    registration.waiting.postMessage({ action: 'skipWaiting' });
-  });
-});
-
-// Function to check if the app is running in standalone mode on iOS
-function isStandalonePWA() {
-  return (
-    window.matchMedia('(display-mode: standalone)').matches ||
-    window.navigator.standalone
-  );
-}
-
 let deferredPrompt;
 const addToHomeScreenButton = document.getElementById('add-to-home-screen-button');
 
