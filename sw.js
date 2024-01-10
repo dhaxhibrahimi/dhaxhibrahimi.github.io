@@ -1,6 +1,6 @@
 // sw.js
 
-const cacheVersion = 6;  // Increment this version number
+const cacheVersion = 7;  // Increment this version number
 const cacheName = `umami-v${cacheVersion}`;
 const filesToCache = [
   '/',

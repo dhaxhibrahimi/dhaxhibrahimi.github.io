@@ -85,3 +85,44 @@ function isStandalonePWA() {
     window.navigator.standalone
   );
 }
+
+let deferredPrompt;
+const addToHomeScreenButton = document.getElementById('add-to-home-screen-button');
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  // Prevent the default browser prompt
+  event.preventDefault();
+
+  // Stash the event so it can be triggered later
+  deferredPrompt = event;
+
+  // Show the "Add to Home Screen" button
+  addToHomeScreenButton.style.display = 'block';
+});
+
+// Function to trigger the installation prompt
+function addToHomeScreen() {
+  // Check if the prompt is available
+  if (deferredPrompt) {
+    // Trigger the prompt
+    deferredPrompt.prompt();
+
+    // Wait for the user to respond to the prompt
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+
+      // Reset the deferredPrompt variable
+      deferredPrompt = null;
+
+      // Hide the "Add to Home Screen" button
+      addToHomeScreenButton.style.display = 'none';
+    });
+  }
+}
+
+// Attach the addToHomeScreen function to the button click event
+addToHomeScreenButton.addEventListener('click', addToHomeScreen);
