@@ -1,6 +1,5 @@
 // sw.js
 
-const cacheBustedUrl = `${url}?t=${new Date().getTime()}`;
 const cacheVersion = 1;  // Increment this version number
 const cacheName = `umami-v${cacheVersion}`;
 const filesToCache = [
@@ -20,7 +19,9 @@ self.addEventListener('install', (event) => {
   // Fetch each file and cache it
   event.waitUntil(
     Promise.all(
-      filesToCache.map((url) => {
+      filesToCache.map((relativePath) => {
+        const url = new URL(relativePath, location.origin);
+        const cacheBustedUrl = `${url}?t=${new Date().getTime()}`;
         return fetch(url)
           .then((response) => {
             if (!response.ok) {
@@ -28,7 +29,7 @@ self.addEventListener('install', (event) => {
             }
             return response;
           })
-          .then((response) => caches.open(cacheName).then((cache) => cache.put(url, response)))
+          .then((response) => caches.open(cacheName).then((cache) => cache.put(cacheBustedUrl, response)))
           .catch((error) => console.error(error));
       })
     )
