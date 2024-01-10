@@ -1,6 +1,6 @@
 // service-worker.js
 
-const cacheVersion = 3;  // Change this version number
+const cacheVersion = 4;  // Change this version number
 const cacheName = `umami-v${cacheVersion}`;
 const filesToCache = [
   '/',
