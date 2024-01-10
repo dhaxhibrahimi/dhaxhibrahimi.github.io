@@ -63,12 +63,24 @@ xhr.onerror = function () {
 
 xhr.send();
 
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && navigator.standalone) {
   navigator.serviceWorker.register('/sw.js')
-    .then((registration) => {
-      console.log('Service Worker registered with scope:', registration.scope);
+    .then(registration => {
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed') {
+            notifyUserAboutUpdate();  // Your update notification logic
+          }
+        });
+      });
     })
-    .catch((error) => {
-      console.error('Service Worker registration failed:', error);
-    });
+    .catch(error => console.error('Service Worker registration failed:', error));
+}
+
+function notifyUserAboutUpdate() {
+  // Implement your logic to notify the user about the update
+  // This could be showing a notification or displaying a UI element
+  // to prompt the user to refresh the page.
+  console.log('New update available! Please refresh the page.');
 }
