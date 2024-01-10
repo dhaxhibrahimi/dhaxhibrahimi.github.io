@@ -63,43 +63,35 @@ xhr.onerror = function () {
 
 xhr.send();
 
-let deferredPrompt;
-const addToHomeScreenButton = document.getElementById('add-to-home-screen-button');
+// Function to show iOS install modal only once
+function showIosInstallModal(localStorageKey) {
+  // Detect if the device is on iOS
+  const isIos = () => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
+  };
+  
+  // Check if the device is in standalone mode
+  const isInStandaloneMode = () => {
+    return (
+      "standalone" in window.navigator &&
+      window.navigator.standalone
+    );
+  };
+  
+  // Check if the modal has already been shown
+  const localStorageKeyValue = localStorage.getItem(localStorageKey);
+  const iosInstallModalShown = localStorageKeyValue
+    ? JSON.parse(localStorageKeyValue)
+    : false;
 
-window.addEventListener('beforeinstallprompt', (event) => {
-  // Prevent the default browser prompt
-  event.preventDefault();
+  // Determine if the modal should be shown
+  const shouldShowModal = isIos() && !isInStandaloneMode() && !iosInstallModalShown;
 
-  // Stash the event so it can be triggered later
-  deferredPrompt = event;
-
-  // Show the "Add to Home Screen" button
-  addToHomeScreenButton.style.display = 'block';
-});
-
-// Function to trigger the installation prompt
-function addToHomeScreen() {
-  // Check if the prompt is available
-  if (deferredPrompt) {
-    // Trigger the prompt
-    deferredPrompt.prompt();
-
-    // Wait for the user to respond to the prompt
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the A2HS prompt');
-      } else {
-        console.log('User dismissed the A2HS prompt');
-      }
-
-      // Reset the deferredPrompt variable
-      deferredPrompt = null;
-
-      // Hide the "Add to Home Screen" button
-      addToHomeScreenButton.style.display = 'none';
-    });
+  // Update localStorage to mark the modal as shown if applicable
+  if (shouldShowModal) {
+    localStorage.setItem(localStorageKey, "true");
   }
-}
 
-// Attach the addToHomeScreen function to the button click event
-addToHomeScreenButton.addEventListener('click', addToHomeScreen);
+  return shouldShowModal;
+}
