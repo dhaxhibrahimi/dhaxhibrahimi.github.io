@@ -75,13 +75,26 @@ if ('serviceWorker' in navigator) {
 
 // update-handler.js
 
-// Example: Ask the user to reload the page
-const reloadConfirmation = confirm('A new version is available. Reload to use the latest version?');
-if (reloadConfirmation) {
-  // Send a message to the service worker to skip waiting and take control of pages
-  navigator.serviceWorker.controller.postMessage({
-    type: 'SKIP_WAITING_CONFIRMATION'
-  });
-  // Optionally, you can handle the page reload in your application logic
-  location.reload(true);
+// Function to notify the user about the update
+function notifyUserAboutUpdate() {
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    // Display a notification or UI element informing the user about the update
+    // ...
+
+    // Example: Ask the user to reload the page
+    const reloadConfirmation = confirm('A new version is available. Reload to use the latest version?');
+    if (reloadConfirmation) {
+      // Send a message to the service worker to skip waiting and take control of pages
+      navigator.serviceWorker.controller.postMessage({
+        type: 'SKIP_WAITING_CONFIRMATION'
+      });
+      // Optionally, you can handle the page reload in your application logic
+      location.reload(true);
+    }
+  } else {
+    console.error('Service Worker controller is not available.');
+  }
 }
+
+// Example usage to notify the user about the update
+notifyUserAboutUpdate();
