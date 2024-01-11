@@ -86,9 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (registration.installing) {
           registration.installing.addEventListener('statechange', () => {
             if (registration.waiting) {
-              hideWebsiteContent(); // Hide website content
               showCustomModal();
-              disableUserInteractions();
             }
           });
         }
@@ -110,28 +108,5 @@ document.addEventListener('DOMContentLoaded', function () {
       navigator.serviceWorker.controller.postMessage({ action: 'skipWaiting' });
     }
     window.location.reload(true);
-  }
-
-  function disableUserInteractions() {
-    // Add styles to disable user interactions
-    document.body.style.pointerEvents = 'none';
-    document.body.style.overflow = 'hidden';
-  }
-
-  function hideWebsiteContent() {
-    const websiteContent = document.getElementById('website-content');
-    websiteContent.style.display = 'none';
-  }
-
-  // After the user refreshes the page, re-enable user interactions and show website content
-  window.addEventListener('load', function () {
-    document.body.style.pointerEvents = 'auto';
-    document.body.style.overflow = 'visible';
-    showWebsiteContent();
-  });
-
-  function showWebsiteContent() {
-    const websiteContent = document.getElementById('website-content');
-    websiteContent.style.display = 'block';
   }
 });
