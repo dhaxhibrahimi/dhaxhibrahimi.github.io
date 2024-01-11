@@ -79,36 +79,34 @@ document.addEventListener('DOMContentLoaded', function () {
   // ... rest of your code
 });
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').then((registration) => {
-    registration.addEventListener('updatefound', () => {
-      if (registration.installing) {
-        registration.installing.addEventListener('statechange', () => {
-          if (registration.waiting) {
-            // A new version is available, show a custom notification
-            showUpdateNotification();
-          }
-        });
-      }
+document.addEventListener('DOMContentLoaded', function () {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').then((registration) => {
+      registration.addEventListener('updatefound', () => {
+        if (registration.installing) {
+          registration.installing.addEventListener('statechange', () => {
+            if (registration.waiting) {
+              showCustomModal();
+            }
+          });
+        }
+      });
     });
-  });
-}
-
-// Show a custom notification about the new version
-function showUpdateNotification() {
-  // You can customize this part with your preferred notification system or modal
-  const confirmation = window.confirm('A new version is available. Do you want to refresh the page?');
-
-  if (confirmation) {
-    // User chose to refresh the page
-    refreshPage();
   }
-}
 
-// Refresh the page when the user chooses to update
-function refreshPage() {
-  if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage({ action: 'skipWaiting' });
+  function showCustomModal() {
+    const modal = document.getElementById('custom-modal');
+    const refreshButton = document.getElementById('refresh-button');
+
+    modal.style.display = 'block';
+
+    refreshButton.addEventListener('click', refreshPage);
   }
-  window.location.reload(true);
-}
+
+  function refreshPage() {
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ action: 'skipWaiting' });
+    }
+    window.location.reload(true);
+  }
+});
