@@ -85,14 +85,24 @@ if ('serviceWorker' in navigator) {
       if (registration.installing) {
         registration.installing.addEventListener('statechange', () => {
           if (registration.waiting) {
-            // A new version is available, show a notification or prompt the user to refresh
-            // For simplicity, this example shows a browser alert
-            alert('A new version is available. Please refresh the page.');
+            // A new version is available, show a custom notification
+            showUpdateNotification();
           }
         });
       }
     });
   });
+}
+
+// Show a custom notification about the new version
+function showUpdateNotification() {
+  // You can customize this part with your preferred notification system or modal
+  const confirmation = window.confirm('A new version is available. Do you want to refresh the page?');
+
+  if (confirmation) {
+    // User chose to refresh the page
+    refreshPage();
+  }
 }
 
 // Refresh the page when the user chooses to update
