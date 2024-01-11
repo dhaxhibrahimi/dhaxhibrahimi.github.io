@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
           registration.installing.addEventListener('statechange', () => {
             if (registration.waiting) {
               showCustomModal();
+              disableUserInteractions();
             }
           });
         }
@@ -109,4 +110,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     window.location.reload(true);
   }
+
+  function disableUserInteractions() {
+    // Add styles to disable user interactions
+    document.body.style.pointerEvents = 'none';
+    document.body.style.overflow = 'hidden';
+  }
+
+  // After the user refreshes the page, re-enable user interactions
+  window.addEventListener('load', function () {
+    document.body.style.pointerEvents = 'auto';
+    document.body.style.overflow = 'visible';
+  });
 });
