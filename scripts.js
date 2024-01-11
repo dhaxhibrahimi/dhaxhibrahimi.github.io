@@ -80,11 +80,13 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
   // Check for service worker updates only in standalone mode
   if ('serviceWorker' in navigator && window.matchMedia('(display-mode: standalone)').matches) {
-      navigator.serviceWorker.register('/sw.js').then(registration => {
+      navigator.serviceWorker.register('/service-worker.js').then(registration => {
           registration.addEventListener('updatefound', () => {
+              console.log('Update found');
               const newWorker = registration.installing;
 
               newWorker.addEventListener('statechange', () => {
+                  console.log('New worker state:', newWorker.state);
                   if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                       // A new service worker version is installed
                       showUpdateNotification();
