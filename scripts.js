@@ -46,18 +46,19 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+// Simulate loading time
 document.addEventListener('DOMContentLoaded', function () {
-    // Simulate a delay to show the splash screen for a certain period
-    setTimeout(function () {
-        var splashScreen = document.getElementById('splash-screen');
-        var websiteContent = document.getElementById('website-content');
+  // Simulate a delay to show the splash screen for a certain period
+  setTimeout(function () {
+      var splashScreen = document.getElementById('splash-screen');
+      var websiteContent = document.getElementById('website-content');
 
-        // Remove the splash screen
-        splashScreen.style.display = 'none';
+      // Remove the splash screen
+      splashScreen.style.display = 'none';
 
-        // Show the content
-        websiteContent.classList.add('loaded');
-    }, 3000); // Adjust the delay time (in milliseconds) as needed
+      // Show the content
+      websiteContent.classList.add('loaded');
+  }, 1900); // Adjust the delay time (in milliseconds) as needed
 });
 
 function fetchAndInsertProducts() {
@@ -74,4 +75,47 @@ document.addEventListener('DOMContentLoaded', function () {
   fetchAndInsertProducts();
 
   // ... rest of your code
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Check for service worker updates only in standalone mode
+  if ('serviceWorker' in navigator && window.matchMedia('(display-mode: standalone)').matches) {
+      navigator.serviceWorker.register('/sw.js').then(registration => {
+          registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+
+              newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      // A new service worker version is installed
+                      showUpdateNotification();
+                      hideUpdateOverlay();
+                  }
+              });
+          });
+      });
+  }
+
+  // Function to show the update notification and disable interactions
+  function showUpdateNotification() {
+      const updatePopup = document.getElementById('update-popup');
+      updatePopup.style.display = 'block';
+
+      // Show the overlay
+      const updateOverlay = document.getElementById('update-overlay');
+      updateOverlay.style.display = 'flex';
+      updateOverlay.classList.add('active');
+
+      const reloadButton = document.getElementById('reload-button');
+      reloadButton.addEventListener('click', function () {
+          // Reload the page
+          window.location.reload();
+      });
+  }
+
+  // Function to hide the overlay after the update is complete
+  function hideUpdateOverlay() {
+      const updateOverlay = document.getElementById('update-overlay');
+      updateOverlay.style.display = 'none';
+      updateOverlay.classList.remove('active');
+  }
 });

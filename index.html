@@ -12,9 +12,9 @@
   <link rel="apple-touch-icon" href="/icons/icon-96x96.png">
 </head>
 <body>
-    <div id="splash-screen">
-        <img src="umamipng.png" alt="Splash Screen">
-    </div>
+  <div id="splash-screen">
+    <img id="logo" src="umamipng.png" alt="Logo">
+</div>
   <header>
 <div id="website-content">
 <!-- Logo -->
@@ -87,6 +87,13 @@
       <!-- Add more img tags for additional logos as needed -->
     </div>
   </footer>
+
+
+  <div id="update-popup">
+    <p>A new update is available. Click "Reload" to apply the changes.</p>
+    <button id="reload-button">Reload</button>
+</div>
+<div id="update-overlay"></div>
 
 <script src="/scripts.js"></script>
 <script src="/app.js"></script>
