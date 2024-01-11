@@ -123,3 +123,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ... rest of your code
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  var menuItems = document.querySelectorAll('.menu-item');
+
+  menuItems.forEach(function (menuItem) {
+      menuItem.addEventListener('click', function () {
+          // Toggle a class to open/close the dropdown
+          this.classList.toggle('dropdown-open');
+
+          // Close other dropdowns
+          menuItems.forEach(function (otherMenuItem) {
+              if (otherMenuItem !== menuItem) {
+                  otherMenuItem.classList.remove('dropdown-open');
+              }
+          });
+      });
+  });
+});

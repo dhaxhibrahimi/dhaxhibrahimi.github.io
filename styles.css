@@ -73,6 +73,8 @@ header {
   background-color: #ff0000;
 }
 
+.show {display: block;}
+
 #menu-container {
   display: flex;
   flex-wrap: wrap;
@@ -322,5 +324,15 @@ h4 {
 
 .menu-item:hover .item-dropdown {
   display: block;
+}
+
+@media screen and (max-width: 767px) {
+  .menu-item .item-dropdown {
+      display: none;
+  }
+
+  .menu-item.mobile-dropdown-open .item-dropdown {
+      display: block;
+  }
 }
 
