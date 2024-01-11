@@ -2,6 +2,8 @@ body {
   font-family: 'Poppins';
   background-color: #1c1c1c;
   scroll-behavior: smooth;
+  --safe-area-top: constant(safe-area-inset-top);
+  min-height: calc(100vh - var(--safe-area-top));
 }
 
 header {
@@ -223,6 +225,8 @@ h3 {
   align-items: center;
   opacity: 1;
   transition: opacity 1s ease-in-out;
+  -webkit-transition: opacity 1s ease-in-out; /* Safari and older versions of Chrome/Opera */
+  -moz-transition: opacity 1s ease-in-out; /* Firefox */
   z-index: 9999;
 }
 
