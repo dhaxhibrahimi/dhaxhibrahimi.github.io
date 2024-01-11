@@ -6,21 +6,24 @@
     <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/icons/icon-96x96.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
+   <link rel="stylesheet" href="/styles.css">
+   <link rel="manifest" href="/manifest.json">
+   <link rel="apple-touch-icon" href="/icons/icon-96x96.png">
+   <title>UMAMI Menu</title>
 </head>
 <body>
   <div id="splash-screen">
-    <img id="logo" src="umamipng.png" alt="Logo">
+    <img id="logo" src="umamipng.png" alt="Logo" loading="lazy">
 </div>
   <header>
 <div id="website-content">
 <!-- Logo -->
   <div class="logo-container">
   <a href="#" id="logo-link">
-  <img src="https://i.ibb.co/3YwgTty/ss.png" alt="Logo" class="custom-logo">
+  <img src="umamipng.png" alt="Logo" class="custom-logo" loading="lazy">
   </a>
 </div>
 
@@ -83,7 +86,7 @@
     </div>
     <div class="sticky-bar" id="sticky-bar">
       <!-- Your sticky bar content goes here -->
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/2560px-Coca-Cola_logo.svg.png" alt="Coca-Cola Logo">
+      <img src="cocacola.png" alt="Coca-Cola Logo" loading="lazy">
       <!-- Add more img tags for additional logos as needed -->
     </div>
   </footer>

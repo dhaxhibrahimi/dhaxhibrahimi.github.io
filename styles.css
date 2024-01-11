@@ -13,13 +13,14 @@ header {
 
 .logo-container {
   text-align: center;
-  padding: 10px;
+  padding: 30px;
   margin-top: 5px;
-  background-color: #1c1c1c;
+  background: #1c1c1c;
 }
 
 .logo-container img {
-  width: 300px;
+  border: none;
+  width: 200px;
   height: auto;
 }
 
@@ -80,6 +81,7 @@ header {
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 5px;
+  transition: height 0.3s ease-in-out;
 }
 
 .menu-category {
@@ -90,6 +92,7 @@ header {
   box-shadow: 0 0 8px rgb(255 0 0 / 30%);
   margin-bottom: 20px;
   width: 100%;
+  transition: height 0.3s ease-in-out;
 }
 
 h2 {
@@ -104,6 +107,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
+  transition: height 0.3s ease-in-out;
 }
 
 .item-details {
