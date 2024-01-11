@@ -46,23 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'menu.html', true);
-
-xhr.onload = function () {
-    if (xhr.status >= 200 && xhr.status < 300) {
-        document.getElementById('menu-container').innerHTML = xhr.responseText;
-    } else {
-        console.error('Error fetching menu.html:', xhr.statusText);
-    }
-};
-
-xhr.onerror = function () {
-    console.error('Network error while fetching menu.html');
-};
-
-xhr.send();
-
 document.addEventListener('DOMContentLoaded', function () {
   var dropdowns = document.querySelectorAll('.item-name');
 
@@ -112,15 +95,31 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Simulate a delay to show the splash screen for a certain period
-  setTimeout(function () {
-      var splashScreen = document.getElementById('splash-screen');
-      var websiteContent = document.getElementById('website-content');
+    // Simulate a delay to show the splash screen for a certain period
+    setTimeout(function () {
+        var splashScreen = document.getElementById('splash-screen');
+        var websiteContent = document.getElementById('website-content');
 
-      // Remove the splash screen
-      splashScreen.style.display = 'none';
+        // Remove the splash screen
+        splashScreen.style.display = 'none';
 
-      // Show the content
-      websiteContent.classList.add('loaded');
-  }, 3000); // Adjust the delay time (in milliseconds) as needed
+        // Show the content
+        websiteContent.classList.add('loaded');
+    }, 3000); // Adjust the delay time (in milliseconds) as needed
+});
+
+function fetchAndInsertProducts() {
+  fetch('menu.html')
+      .then(response => response.text())
+      .then(data => {
+          document.getElementById('menu-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error fetching products.html:', error));
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Call the function when the DOM is ready
+  fetchAndInsertProducts();
+
+  // ... rest of your code
 });
