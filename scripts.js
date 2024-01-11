@@ -46,18 +46,20 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// Simulate loading time
 document.addEventListener('DOMContentLoaded', function () {
+  var splashScreen = document.getElementById('splash-screen');
+  var websiteContent = document.getElementById('website-content');
+
+  // Add the show class to the splash screen for a smooth fade-in effect
+  splashScreen.classList.add('show');
+
   // Simulate a delay to show the splash screen for a certain period
   setTimeout(function () {
-      var splashScreen = document.getElementById('splash-screen');
-      var websiteContent = document.getElementById('website-content');
+    // Remove the splash screen
+    splashScreen.style.display = 'none';
 
-      // Remove the splash screen
-      splashScreen.style.display = 'none';
-
-      // Show the content
-      websiteContent.classList.add('loaded');
+    // Show the content with a smooth transition
+    websiteContent.classList.add('loaded');
   }, 1900); // Adjust the delay time (in milliseconds) as needed
 });
 
