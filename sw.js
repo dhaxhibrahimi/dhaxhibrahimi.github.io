@@ -1,6 +1,6 @@
 // sw.js
 
-const cacheVersion = 5.4;  // Increment this version number
+const cacheVersion = 5.5;  // Increment this version number
 const cacheName = `umami-v${cacheVersion}`;
 const filesToCache = [
   '/',
@@ -66,4 +66,49 @@ self.addEventListener('fetch', (event) => {
       return response || fetch(event.request);
     })
   );
+});
+
+// Check for updates on user navigation
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.open(cacheName).then((cache) => {
+      return fetch(event.request).then((response) => {
+        cache.put(event.request, response.clone());
+        return response;
+      });
+    })
+  );
+});
+
+// Check for updates in the background
+self.addEventListener('message', (event) => {
+  if (event.data.action === 'skipWaiting') {
+    self.skipWaiting();
+  }
+});
+
+// Check for updates on page load
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.open(cacheName).then((cache) => {
+      return cache.keys().then((keys) => {
+        keys.forEach((key) => {
+          if (!filesToCache.includes(key.url)) {
+            cache.delete(key);
+          }
+        });
+      });
+    })
+  );
+});
+
+// Notify the user about a new version
+self.addEventListener('message', (event) => {
+  if (event.data.action === 'newVersionAvailable') {
+    self.clients.matchAll().then((clients) => {
+      clients.forEach((client) => {
+        client.postMessage({ action: 'showUpdateNotification' });
+      });
+    });
+  }
 });

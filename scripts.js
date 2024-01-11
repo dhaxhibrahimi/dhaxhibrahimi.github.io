@@ -79,47 +79,26 @@ document.addEventListener('DOMContentLoaded', function () {
   // ... rest of your code
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  // Check for service worker updates only in standalone mode
-  if ('serviceWorker' in navigator && window.matchMedia('(display-mode: standalone)').matches) {
-      navigator.serviceWorker.register('/service-worker.js').then(registration => {
-          registration.addEventListener('updatefound', () => {
-              console.log('Update found');
-              const newWorker = registration.installing;
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then((registration) => {
+    registration.addEventListener('updatefound', () => {
+      if (registration.installing) {
+        registration.installing.addEventListener('statechange', () => {
+          if (registration.waiting) {
+            // A new version is available, show a notification or prompt the user to refresh
+            // For simplicity, this example shows a browser alert
+            alert('A new version is available. Please refresh the page.');
+          }
+        });
+      }
+    });
+  });
+}
 
-              newWorker.addEventListener('statechange', () => {
-                  console.log('New worker state:', newWorker.state);
-                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                      // A new service worker version is installed
-                      showUpdateNotification();
-                      hideUpdateOverlay();
-                  }
-              });
-          });
-      });
+// Refresh the page when the user chooses to update
+function refreshPage() {
+  if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ action: 'skipWaiting' });
   }
-
-  // Function to show the update notification and disable interactions
-  function showUpdateNotification() {
-      const updatePopup = document.getElementById('update-popup');
-      updatePopup.style.display = 'block';
-
-      // Show the overlay
-      const updateOverlay = document.getElementById('update-overlay');
-      updateOverlay.style.display = 'flex';
-      updateOverlay.classList.add('active');
-
-      const reloadButton = document.getElementById('reload-button');
-      reloadButton.addEventListener('click', function () {
-          // Reload the page
-          window.location.reload();
-      });
-  }
-
-  // Function to hide the overlay after the update is complete
-  function hideUpdateOverlay() {
-      const updateOverlay = document.getElementById('update-overlay');
-      updateOverlay.style.display = 'none';
-      updateOverlay.classList.remove('active');
-  }
-});
+  window.location.reload(true);
+}
