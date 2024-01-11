@@ -311,11 +311,8 @@ label {
   display: flex;
   color: #fff;
   cursor: pointer;
-  /* padding: 12px 5px 5px 20px; */
   position: relative;
   user-select: none;
-  /* flex-direction: row; */
-  /* flex-wrap: nowrap; */
   justify-content: left;
   align-items: center;
 }
@@ -327,14 +324,12 @@ label:before {
   border-color: transparent transparent transparent rgb(255, 255, 255);
   height: 0;
   font-size: 0;
-  /* position: absolute; */
   top: 18px;
   left: 10px;
   transition: transform 0.5s;
   transform-origin: 3px center;
 }
 .accordian div {
-  font-size: 26px;  
   height:0;
   overflow:hidden;
   opacity:0;
@@ -348,7 +343,10 @@ input:checked ~ label:before {
   transform: rotate(90deg)
 }
 input:checked ~ div {
-  padding: 10px;
+  color: #fff;
   opacity: 1;
   height: auto;
+  font-size: 12px;
+  text-transform: lowercase;
+  margin-top: 5px;
 }
