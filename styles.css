@@ -2,8 +2,6 @@ body {
   font-family: 'Poppins';
   background-color: #1c1c1c;
   scroll-behavior: smooth;
-  --safe-area-top: constant(safe-area-inset-top);
-  min-height: calc(100vh - var(--safe-area-top));
 }
 
 header {

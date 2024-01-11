@@ -1,74 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#1c1c1c">
     <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
-    <link rel="preload" href="styles.css" as="style">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+   <link rel="stylesheet" href="/styles.css">
    <link rel="manifest" href="/manifest.json">
    <link rel="apple-touch-icon" href="/icons/icon-96x96.png">
-   <link rel="icon" type="image/png" href="umamipng.png">
    <title>UMAMI Menu</title>
-   <style>
-    body {
-        font-family: 'Poppins';
-        background-color: #1c1c1c;
-        scroll-behavior: smooth;
-        --safe-area-top: constant(safe-area-inset-top);
-        min-height: calc(100vh - var(--safe-area-top));
-    }
-
-    #splash-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: #1c1c1c;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 1;
-        transition: opacity 1s ease-in-out;
-        -webkit-transition: opacity 1s ease-in-out; /* Safari and older versions of Chrome/Opera */
-        -moz-transition: opacity 1s ease-in-out; /* Firefox */
-        z-index: 9999;
-    }
-
-    #splash-screen.show {
-        opacity: 1;
-    }
-
-    #splash-screen img {
-        width: 192.4px;
-        height: 62.4px;
-        animation: dropAndFade 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-    }
-
-    @keyframes dropAndFade {
-        0% {
-            transform: translateY(-100%);
-            opacity: 0;
-        }
-        50% {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(20%);
-            opacity: 0;
-        }
-    }
-</style>
 </head>
 <body>
   <div id="splash-screen">
-    <img id="logo" src="umamipng.png" alt="Umami Logo" loading="lazy">
+    <img id="logo" src="umamipng.png" alt="Logo" loading="lazy">
 </div>
   <header>
 <div id="website-content">
