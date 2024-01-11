@@ -1,6 +1,6 @@
 // sw.js
 
-const cacheVersion = 4.2;  // Increment this version number
+const cacheVersion = 4.3;  // Increment this version number
 const cacheName = `umami-v${cacheVersion}`;
 const filesToCache = [
   '/',
@@ -66,47 +66,4 @@ self.addEventListener('fetch', (event) => {
       return response || fetch(event.request);
     })
   );
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-  // Check for service worker updates only in standalone mode
-  if ('serviceWorker' in navigator && window.matchMedia('(display-mode: standalone)').matches) {
-      navigator.serviceWorker.register('/sw.js').then(registration => {
-          registration.addEventListener('updatefound', () => {
-              const newWorker = registration.installing;
-
-              newWorker.addEventListener('statechange', () => {
-                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                      // A new service worker version is installed
-                      showUpdateNotification();
-                      hideUpdateOverlay();
-                  }
-              });
-          });
-      });
-  }
-
-  // Function to show the update notification and disable interactions
-  function showUpdateNotification() {
-      const updatePopup = document.getElementById('update-popup');
-      updatePopup.style.display = 'block';
-
-      // Show the overlay
-      const updateOverlay = document.getElementById('update-overlay');
-      updateOverlay.style.display = 'flex';
-      updateOverlay.classList.add('active');
-
-      const reloadButton = document.getElementById('reload-button');
-      reloadButton.addEventListener('click', function () {
-          // Reload the page
-          window.location.reload();
-      });
-  }
-
-  // Function to hide the overlay after the update is complete
-  function hideUpdateOverlay() {
-      const updateOverlay = document.getElementById('update-overlay');
-      updateOverlay.style.display = 'none';
-      updateOverlay.classList.remove('active');
-  }
 });
