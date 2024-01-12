@@ -233,8 +233,7 @@ h3 {
 }
 
 #splash-screen img {
-  width: 192.4px;
-  height: 62.4px;
+  width: 250px;
   animation: dropAndFade 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
