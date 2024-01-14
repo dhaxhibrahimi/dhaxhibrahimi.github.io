@@ -152,27 +152,6 @@ p {
   font-size: 14px;
 }
 
-/* Mobile Styles */
-@media only screen and (max-width: 768px),
-       only screen and (max-width: 1280px),
-       only screen and (max-width: 480px) {
-  .navbar a,
-  .dropdown .dropbtn {
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .menu-category {
-    width: 100%;
-  }
-
-  h2 {
-    white-space: normal;
-    font-size: 19px;
-    overflow-wrap: anywhere;
-  }
-}
-
 .spacer {
   width: 100%;
   background-color: #D2042D;
@@ -217,7 +196,6 @@ h3 {
   padding: 5px;
   flex-direction: row;
   flex-wrap: wrap;
-  max-height: 100px;
   max-width: 100%;
 }
 
@@ -488,3 +466,25 @@ input:checked ~ div {
   justify-content: space-around;
   padding: 5px;
 }
+
+/* Mobile Styles */
+@media only screen and (max-width: 768px),
+       only screen and (max-width: 1280px),
+       only screen and (max-width: 480px) {
+  .navbar a,
+  .dropdown .dropbtn {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .menu-category {
+    width: 100%;
+  }
+
+  h2 {
+    white-space: normal;
+    font-size: 19px;
+    overflow-wrap: anywhere;
+  }
+}
+
