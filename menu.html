@@ -1,31 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="theme-color" content="#1c1c1c">
-    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="expires" content="0">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
-   <link rel="stylesheet" href="/styles.css">
-   <link rel="manifest" href="/manifest.json">
-   <link rel="apple-touch-icon" href="/icons/icon-96x96.png">
-   <title>UMAMI Menu</title>
-</head>
-
-<body>
-
 <!-- Category 1: Predjelo -->
     <div class="menu-category full-width" id="predjelo">
-        <h2>Predjelo/Paragjelle/Appetizer</h2>
+        <h2><img src="/categoryicons/appetizer_9660489.png">Predjelo/Paragjelle/Appetizer</h2>
         <!-- Item -->
         <div class="menu-item">
             <div class="accordian">
                 <input type="checkbox" id="trigger"/>
                 <label for="trigger">Miks Sireva/Mix djatherash/Cheese mix</label>
-                <div><img src="umami.jpg"></div>
+                <div>
+                    <img src="umami.jpg" alt="miks sireva" loading="lazy" class="custom-image"></div>
               </div>
             <div class="item-price">11.00&euro;</div>
         </div>
@@ -34,7 +16,7 @@
             <div class="accordian">
                 <input type="checkbox" id="trigger2"/>
                 <label for="trigger2">Grilovano povrce/Perime te skuqura/Fried Vegetables</label>
-                <div><img src="umami.jpg"></div>
+                <div><img src="umami.jpg" alt="grilovano povrce" loading="lazy" onclick="toggleFullscreen(this)"></div>
               </div>
             <div class="item-price">6.00&euro;</div>
         </div>
@@ -43,7 +25,7 @@
             <div class="accordian">
                 <input type="checkbox" id="trigger3"/>
                 <label for="trigger3">Beef Tataki</label>
-                <div>Description for Item 3.<img src="umami.jpg"></div>
+                <div>Description for Item 3.<img src="umami.jpg"alt="beef tataki" loading="lazy" ></div>
               </div>
             <div class="item-price">12.00&euro;</div>
         </div>
@@ -52,7 +34,7 @@
     </div>
     <!-- Category 2: Salata -->
     <div class="menu-category full-width" id="salata">
-        <h2>Salate/Sallata/Salads</h2>
+        <h2><img src="/categoryicons/salad_3831114.png">Salate/Sallata/Salads</h2>
         <!-- Item 3 -->
         <div class="menu-item">
             <div class="item-details">
@@ -89,7 +71,7 @@
 
     <!-- Category 3: Another Category -->
     <div class="menu-category full-width" id="supe">
-        <h2>Supe/Supa/Soups</h2>
+        <h2><img src="/categoryicons/soup_3547146.png">Supe/Supa/Soups</h2>
         <!-- Item 5 -->
         <div class="menu-item">
             <div class="item-details">
@@ -105,7 +87,7 @@
 
     <!-- Category 3: Another Category -->
     <div class="menu-category full-width" id="pasta">
-        <h2>Pasta Linguine</h2>
+        <h2><img src="/categoryicons/spaguetti.png">Pasta Linguine</h2>
         <!-- Item 5 -->
         <div class="menu-item">
             <div class="item-details">
@@ -142,7 +124,7 @@
     </div>
     <!-- Category 3: Another Category -->
     <div class="menu-category full-width" id="rizoto">
-        <h2>Rizoto/Rizoto/Risotto</h2>
+        <h2><img src="/categoryicons/risotto.png">Rizoto/Rizoto/Risotto</h2>
         <!-- Item 5 -->
         <div class="menu-item">
             <div class="item-details">
@@ -177,7 +159,7 @@
     </div>
     <!-- Category 3: Another Category -->
     <div class="menu-category full-width" id="meso">
-        <h2>Meso/Mish/Meat</h2>
+        <h2><img src="/categoryicons/steak.png">Meso/Mish/Meat</h2>
         <!-- Item 5 -->
         <div class="menu-item">
             <div class="item-details">
@@ -206,7 +188,7 @@
     </div>
     <!-- Category 3: Another Category -->
     <div class="menu-category full-width" id="pizza">
-        <h2>Pizza</h2>
+        <h2><img src="/categoryicons/pizza-slice.png">Pizza</h2>
         <!-- Item 5 -->
         <div class="menu-item">
             <div class="item-details">
@@ -275,7 +257,7 @@
     </div>
     <!-- Category 3: Another Category -->
     <div class="menu-category full-width" id="fast-food">
-        <h2>Fast Food</h2>
+        <h2><img src="/categoryicons/fast-food.png">Fast Food</h2>
         <!-- Item 5 -->
         <div class="menu-item">
             <div class="item-details">
@@ -320,7 +302,7 @@
     </div>
     <!-- Category 3: Another Category -->
     <div class="menu-category full-width" id="dorucak">
-        <h2>Dorucak/Mengjesi/breakfast</h2>
+        <h2><img src="/categoryicons/english-breakfast.png">Dorucak/Mengjesi/breakfast</h2>
         <!-- Item 5 -->
         <div class="menu-item">
             <div class="item-details">
@@ -365,7 +347,7 @@
     </div>
     <!-- Category 3: Another Category -->
     <div class="menu-category full-width" id="meze">
-        <h2>Meze</h2>
+        <h2><img src="/categoryicons/nuggets.png">Meze</h2>
         <!-- Item 5 -->
         <div class="menu-item">
             <div class="item-details">
@@ -1578,6 +1560,4 @@
 </div>
 
   </div>
-
-</body>
-</html>
+  
