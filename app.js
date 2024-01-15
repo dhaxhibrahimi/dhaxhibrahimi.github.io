@@ -4,3 +4,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.body.classList.add('loaded');
     }, 2000); // 2000 milliseconds (adjust as needed)
 });
+

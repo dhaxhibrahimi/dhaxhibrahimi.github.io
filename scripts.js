@@ -63,20 +63,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 1900); // Adjust the delay time (in milliseconds) as needed
 });
 
-function fetchAndInsertProducts() {
-  fetch('menu.html')
-      .then(response => response.text())
-      .then(data => {
-          document.getElementById('menu-container').innerHTML = data;
-      })
-      .catch(error => console.error('Error fetching products.html:', error));
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  // Call the function when the DOM is ready
-  fetchAndInsertProducts();
-
-  // ... rest of your code
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('/menu.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('menu-container').innerHTML = data;
+    });
 });
 
 document.addEventListener('DOMContentLoaded', function () {
